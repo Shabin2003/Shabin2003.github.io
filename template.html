@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ site.title }}</title>
+<meta name="description" content="{{ site.description }}">
+<link rel="canonical" href="{{ site.url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ site.title }}">
+<meta property="og:description" content="{{ site.description }}">
+<meta property="og:url" content="{{ site.url }}">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23b4381f'/%3E%3Cpath d='M10 22h12' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+<script type="application/ld+json">{{ schema | tojson }}</script>
+<style>
+:root {
+  --paper: #f6f3ec; --ink: #1c1b18; --muted: #625e54; --rule: #d9d4c7; --accent: #a8341c;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --mono: ui-monospace, "Cascadia Code", Consolas, Menlo, monospace;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #15140f; --ink: #ece7da; --muted: #a39e90; --rule: #34322a; --accent: #f0836a; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.6 var(--serif); }
+.wrap { max-width: 60rem; margin: 0 auto; padding: 0 1.25rem; }
+a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: .2em; }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: 1rem; background: var(--paper); padding: .5rem; }
+.meta { font: .8125rem/1.5 var(--mono); color: var(--muted); }
+.topbar { display: flex; justify-content: space-between; gap: 1rem; padding: 1.5rem 0; }
+.topbar nav { display: flex; gap: 1.25rem; }
+.hero { padding: clamp(3rem, 10vw, 7rem) 0 clamp(2.5rem, 7vw, 4.5rem); }
+h1 { font-size: clamp(2.5rem, 7.5vw, 4.75rem); line-height: 1.04; letter-spacing: -.02em; font-weight: 400; margin: 0 0 1.5rem; max-width: 14em; }
+.intro { font-size: 1.25rem; max-width: 34em; margin: 0; }
+section { border-top: 1px solid var(--ink); padding: 1rem 0 3.5rem; }
+h2 { font: .8125rem/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; margin: 0 0 2rem; }
+ul { list-style: none; margin: 0; padding: 0; }
+.feature { display: grid; grid-template-columns: 3rem 1fr; padding: 1.5rem 0; border-top: 1px solid var(--rule); }
+.feature:first-child { border-top: 0; padding-top: 0; }
+.feature h3 { font-size: clamp(1.5rem, 4vw, 2.125rem); line-height: 1.15; font-weight: 400; margin: 0 0 .5rem; overflow-wrap: anywhere; }
+.feature p { margin: 0 0 .75rem; max-width: 38em; }
+.feature img { display: block; width: 100%; max-width: 38em; height: auto; margin-bottom: 1rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin-top: .25rem; }
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.filters button { font: .8125rem/1 var(--mono); color: var(--ink); background: none; border: 1px solid var(--rule); padding: .625rem .75rem; cursor: pointer; }
+.filters button:hover { border-color: var(--ink); }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.row { display: grid; grid-template-columns: 5.5rem minmax(0, 15rem) 1fr; gap: 0 1.5rem; padding: .875rem 0; border-top: 1px solid var(--rule); }
+.row[hidden] { display: none; }
+.row a { overflow-wrap: anywhere; }
+.row p { margin: 0; font-size: 1rem; }
+.columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1.5rem; margin: 0; }
+.columns dd { margin: .375rem 0 0; }
+.job { padding: 1rem 0; border-top: 1px solid var(--rule); }
+.job h3 { font-size: 1.25rem; font-weight: 400; margin: 0; }
+.job p { margin: .25rem 0 0; }
+.links { display: flex; flex-wrap: wrap; gap: .5rem 2rem; font-size: clamp(1.5rem, 4vw, 2.125rem); }
+footer { padding: 0 0 2.5rem; }
+@media (max-width: 40rem) {
+  .feature { grid-template-columns: 1fr; }
+  .feature .num { margin-bottom: .25rem; }
+  .row { grid-template-columns: 1fr; gap: .25rem; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="topbar meta">
+    <span>{{ site.name }}, {{ site.location }}</span>
+    <nav aria-label="Sections"><a href="#projects">Projects</a><a href="#contact">Contact</a></nav>
+  </header>
+  <main id="main">
+    <div class="hero">
+      <h1>{{ site.headline }}</h1>
+      <p class="intro">{{ site.intro }}</p>
+    </div>
+
+    {% if featured %}
+    <section aria-labelledby="featured-title">
+      <h2 id="featured-title">Selected work</h2>
+      <ol style="list-style:none;margin:0;padding:0">
+        {% for p in featured %}
+        <li class="feature">
+          <span class="meta num">{{ "%02d" | format(loop.index) }}</span>
+          <div>
+            {% if p.image %}<img src="{{ p.image }}" alt="" width="1280" height="640" loading="lazy">{% endif %}
+            <h3><a href="{{ p.url }}">{{ p.name }}</a></h3>
+            {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+            <div class="meta">{{ p.topics | join(" / ") }}{% if p.topics and p.language %} / {% endif %}{{ p.language or "" }}</div>
+            <div class="meta actions">
+              <a href="{{ p.url }}" aria-label="{{ p.name }} source code">Code</a>
+              {% if p.demo %}<a href="{{ p.demo }}" aria-label="{{ p.name }} live demo">Live demo</a>{% endif %}
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+    {% endif %}
+
+    <section id="projects" aria-labelledby="all-title">
+      <h2 id="all-title">All projects <span id="count" aria-live="polite">({{ projects | length }})</span></h2>
+      {% if topics %}
+      <div class="filters" id="filters" hidden>
+        <button type="button" aria-pressed="true" data-topic="">All</button>
+        {% for t in topics %}<button type="button" aria-pressed="false" data-topic="{{ t }}">{{ t }}</button>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <ul>
+        {% for p in projects %}
+        <li class="row" data-topics="{{ p.topics | join(' ') }}">
+          <span class="meta">{{ p.updated[:7] }}</span>
+          <a href="{{ p.url }}">{{ p.name }}</a>
+          <div>
+            {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+            <div class="meta">{{ p.language or "" }}{% if p.stars %} / {{ p.stars }} star{{ "s" if p.stars != 1 }}{% endif %}{% if p.demo %} / <a href="{{ p.demo }}" aria-label="{{ p.name }} live demo">Live demo</a>{% endif %}</div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    {% if site.experience %}
+    <section aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience</h2>
+      {% for job in site.experience %}
+      <div class="job">
+        <h3>{{ job.role }}, {{ job.org }}</h3>
+        <div class="meta">{{ job.period }}</div>
+        <p>{{ job.summary }}</p>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    <section aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <dl class="columns">
+        {% for s in site.skills %}
+        <div><dt class="meta">{{ s.group }}</dt><dd>{{ s["items"] | join(", ") }}</dd></div>
+        {% endfor %}
+      </dl>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <div class="links">{% for link in site.links %}<a href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div>
+    </section>
+  </main>
+  <footer class="meta">Project list updated automatically from GitHub on {{ built }}.</footer>
+</div>
+<script>
+(function () {
+  var bar = document.getElementById("filters");
+  if (!bar) return;
+  bar.hidden = false;
+  var rows = document.querySelectorAll(".row");
+  bar.addEventListener("click", function (event) {
+    var button = event.target.closest("button");
+    if (!button) return;
+    var topic = button.dataset.topic, shown = 0;
+    bar.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b === button); });
+    rows.forEach(function (row) {
+      var match = !topic || row.dataset.topics.split(" ").indexOf(topic) !== -1;
+      row.hidden = !match;
+      if (match) shown++;
+    });
+    document.getElementById("count").textContent = "(" + shown + ")";
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Everything on the site that does not come from your GitHub repos.
+github_user: Shabin2003
+url: https://shabin2003.github.io/
+name: Shabin S
+location: Noida
+title: Shabin S | Applied AI projects
+description: Portfolio of Shabin S, a student at JSSATE Noida building RAG systems, multi-agent apps and speech AI.
+headline: I build applied AI and ship it as working software.
+intro: >-
+  I'm Shabin, a student at JSSATE Noida. My projects range from RAG pipelines and
+  multi-agent tutors to speech verification for children, usually built end to end
+  from the model to the web app.
+
+# Add a line here to add a link. Links starting with http are also shared with search engines.
+links:
+  - {label: GitHub, url: "https://github.com/Shabin2003"}
+  # - {label: LinkedIn, url: "https://www.linkedin.com/in/your-handle"}
+  # - {label: Email, url: "mailto:you@example.com"}
+  # - {label: Resume, url: "https://example.com/resume.pdf"}
+
+skills:
+  - {group: Languages, items: [Python, TypeScript, C]}
+  - {group: Machine learning, items: [PyTorch, scikit-learn, Whisper, ECAPA-TDNN]}
+  - {group: LLM systems, items: [LangChain, LangGraph, RAG, Pinecone]}
+  - {group: Web, items: [FastAPI, React, Next.js]}
+
+# The Experience section appears once this list has entries.
+experience: []
+#  - {role: ML Intern, org: Company, period: 2026, summary: What you built and why it mattered.}
