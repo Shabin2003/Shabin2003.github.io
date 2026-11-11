@@ -11,93 +11,177 @@
 <meta property="og:description" content="{{ site.description }}">
 <meta property="og:url" content="{{ site.url }}">
 <meta name="twitter:card" content="summary">
-<meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23b4381f'/%3E%3Cpath d='M10 22h12' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#06103a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2338b6ff'/%3E%3Cstop offset='1' stop-color='%235b4bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Loaded without blocking the first paint; the system font shows until it arrives. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600&display=swap"></noscript>
 <script type="application/ld+json">{{ schema | tojson }}</script>
 <style>
 :root {
-  --paper: #f6f3ec; --ink: #1c1b18; --muted: #625e54; --rule: #d9d4c7; --accent: #a8341c;
-  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  --mono: ui-monospace, "Cascadia Code", Consolas, Menlo, monospace;
-  color-scheme: light dark;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --paper: #15140f; --ink: #ece7da; --muted: #a39e90; --rule: #34322a; --accent: #f0836a; }
+  --bg: #07133f; --ink: #f5f8ff; --soft: #c3cff0; --muted: #94a5d4;
+  --line: rgba(190, 210, 255, .16); --glass: rgba(150, 180, 255, .08);
+  --sky: #4cc3ff; --blue: #2f6bff; --indigo: #6a5cff;
+  --font: "Google Sans Flex", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --radius: 1.75rem;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.6 var(--serif); }
-.wrap { max-width: 60rem; margin: 0 auto; padding: 0 1.25rem; }
-a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: .2em; }
-a:hover { color: var(--accent); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.skip { position: absolute; left: -999px; }
-.skip:focus { left: 1rem; top: 1rem; background: var(--paper); padding: .5rem; }
-.meta { font: .8125rem/1.5 var(--mono); color: var(--muted); }
-.topbar { display: flex; justify-content: space-between; gap: 1rem; padding: 1.5rem 0; }
-.topbar nav { display: flex; gap: 1.25rem; }
-.hero { padding: clamp(3rem, 10vw, 7rem) 0 clamp(2.5rem, 7vw, 4.5rem); }
-h1 { font-size: clamp(2.5rem, 7.5vw, 4.75rem); line-height: 1.04; letter-spacing: -.02em; font-weight: 400; margin: 0 0 1.5rem; max-width: 14em; }
-.intro { font-size: 1.25rem; max-width: 34em; margin: 0; }
-section { border-top: 1px solid var(--ink); padding: 1rem 0 3.5rem; }
-h2 { font: .8125rem/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; margin: 0 0 2rem; }
-ul { list-style: none; margin: 0; padding: 0; }
-.feature { display: grid; grid-template-columns: 3rem 1fr; padding: 1.5rem 0; border-top: 1px solid var(--rule); }
-.feature:first-child { border-top: 0; padding-top: 0; }
-.feature h3 { font-size: clamp(1.5rem, 4vw, 2.125rem); line-height: 1.15; font-weight: 400; margin: 0 0 .5rem; overflow-wrap: anywhere; }
-.feature p { margin: 0 0 .75rem; max-width: 38em; }
-.feature img { display: block; width: 100%; max-width: 38em; height: auto; margin-bottom: 1rem; }
-.actions { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin-top: .25rem; }
-.filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
-.filters button { font: .8125rem/1 var(--mono); color: var(--ink); background: none; border: 1px solid var(--rule); padding: .625rem .75rem; cursor: pointer; }
-.filters button:hover { border-color: var(--ink); }
-.filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.row { display: grid; grid-template-columns: 5.5rem minmax(0, 15rem) 1fr; gap: 0 1.5rem; padding: .875rem 0; border-top: 1px solid var(--rule); }
+html { background: var(--bg); scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+/* The blended sky behind the top of the page. */
+body {
+  margin: 0; color: var(--ink); font: 400 1.0625rem/1.6 var(--font);
+  background:
+    radial-gradient(52rem 34rem at 12% 2%, rgba(47, 107, 255, .7), transparent 68%),
+    radial-gradient(46rem 32rem at 92% 6%, rgba(106, 92, 255, .6), transparent 68%),
+    radial-gradient(54rem 30rem at 52% 34%, rgba(76, 195, 255, .3), transparent 70%),
+    linear-gradient(#0b2478, var(--bg));
+  background-repeat: no-repeat; background-size: 100% 78rem;
+}
+::selection { background: var(--sky); color: #04103a; }
+.wrap { max-width: 68rem; margin: 0 auto; padding: .875rem 1.25rem 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; border-radius: .5rem; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+p { margin: 0; }
+.skip { position: absolute; left: -999px; z-index: 20; }
+.skip:focus { left: 1rem; top: 1rem; background: var(--ink); color: var(--bg); padding: .5rem .875rem; border-radius: 99px; }
+
+.nav { position: sticky; top: .875rem; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .5rem .5rem .5rem 1.25rem; border: 1px solid var(--line); border-radius: 99px; background: rgba(8, 22, 78, .62); -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4); }
+.nav .name { font-weight: 600; text-decoration: none; letter-spacing: -.01em; }
+.nav ul { display: flex; gap: .125rem; }
+.nav li a { display: block; padding: .5rem .875rem; border-radius: 99px; font-size: .9375rem; color: var(--soft); text-decoration: none; }
+.nav li a:hover { background: var(--glass); color: var(--ink); }
+
+.hero { text-align: center; padding: clamp(4rem, 12vw, 8.5rem) 0 clamp(3.5rem, 9vw, 6.5rem); }
+.eyebrow { display: inline-block; padding: .375rem .875rem; border: 1px solid var(--line); border-radius: 99px; background: var(--glass); font-size: .875rem; color: var(--soft); }
+h1 { font: 500 clamp(2.5rem, 7.2vw, 5rem)/1.04 var(--font); letter-spacing: -.035em; margin: 1.5rem auto 1.5rem; max-width: 13em; background: linear-gradient(100deg, #fff 20%, #bfe0ff 55%, #a9b4ff 90%); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .08em; }
+.intro { font-size: clamp(1.0625rem, 2.2vw, 1.3125rem); line-height: 1.5; color: var(--soft); max-width: 36em; margin: 0 auto; }
+.cta { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; margin-top: 2.25rem; }
+.btn { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 1.375rem; border-radius: 99px; border: 1px solid var(--line); background: var(--glass); font-weight: 500; font-size: 1rem; text-decoration: none; transition: background .2s, transform .2s; }
+.btn:hover { background: rgba(150, 180, 255, .18); }
+.btn.primary { background: var(--ink); color: #06103a; border-color: transparent; }
+.btn.primary:hover { background: #dbe8ff; }
+.btn.small { min-height: 2.25rem; padding: 0 1rem; font-size: .9375rem; }
+.stats { display: flex; flex-wrap: wrap; justify-content: center; margin: clamp(3rem, 7vw, 4.5rem) auto 0; }
+.stats div { padding: 0 2rem; border-left: 1px solid var(--line); }
+.stats div:first-child { border-left: 0; }
+.stats dt { font-size: .8125rem; color: var(--muted); }
+.stats dd { margin: .125rem 0 0; font-size: 1.125rem; font-weight: 500; }
+
+section { padding: clamp(3rem, 8vw, 5.5rem) 0 0; }
+.head { text-align: center; margin-bottom: 2.5rem; }
+.kicker { font-size: .875rem; font-weight: 500; color: var(--sky); }
+h2 { font: 500 clamp(1.875rem, 4.6vw, 3rem)/1.1 var(--font); letter-spacing: -.03em; margin: .375rem 0 0; }
+
+.panel { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(160deg, rgba(150, 180, 255, .13), rgba(150, 180, 255, .04)); }
+.bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.feature { position: relative; overflow: hidden; display: flex; flex-direction: column; min-height: 21rem; padding: 2rem; transition: transform .25s, border-color .25s; }
+.feature:hover { transform: translateY(-3px); border-color: rgba(190, 210, 255, .34); }
+.feature:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+/* Each card gets its own blend of the same three blues. */
+.feature::before { content: ""; position: absolute; width: 26rem; height: 26rem; right: -9rem; top: -11rem; border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, var(--glow, rgba(47, 107, 255, .7)), transparent); }
+.feature:nth-child(4n+2) { --glow: rgba(106, 92, 255, .7); }
+.feature:nth-child(4n+3) { --glow: rgba(76, 195, 255, .5); }
+.feature:nth-child(4n+4) { --glow: rgba(64, 140, 255, .65); }
+.feature > * { position: relative; }
+.feature .top { display: flex; justify-content: space-between; font-size: .875rem; color: var(--soft); }
+.feature img { display: block; width: 100%; height: auto; margin-top: 1.25rem; border-radius: 1rem; border: 1px solid var(--line); }
+.feature h3 { font: 500 clamp(1.5rem, 3vw, 2rem)/1.15 var(--font); letter-spacing: -.025em; margin: 2.5rem 0 .75rem; overflow-wrap: anywhere; }
+.feature h3 a { text-decoration: none; }
+.feature p { color: var(--soft); font-size: 1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .375rem; margin: 1.25rem 0 1.75rem; }
+.chips li { padding: .1875rem .6875rem; border-radius: 99px; background: rgba(150, 180, 255, .12); font-size: .8125rem; color: var(--soft); }
+.actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: auto; }
+
+.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-bottom: 1.5rem; }
+.filters button { font: 500 .9375rem/1 var(--font); color: var(--soft); background: var(--glass); border: 1px solid var(--line); border-radius: 99px; padding: .6875rem 1rem; cursor: pointer; transition: background .2s; }
+.filters button:hover { background: rgba(150, 180, 255, .18); color: var(--ink); }
+.filters button[aria-pressed="true"] { background: var(--ink); color: #06103a; border-color: transparent; }
+.list { padding: .5rem 1.75rem; }
+.row { display: grid; grid-template-columns: minmax(0, 16rem) minmax(0, 1fr) auto; gap: .25rem 2rem; align-items: baseline; padding: 1.125rem 0; border-top: 1px solid var(--line); }
+.row:first-child, .row.first { border-top: 0; }
 .row[hidden] { display: none; }
-.row a { overflow-wrap: anywhere; }
-.row p { margin: 0; font-size: 1rem; }
-.columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1.5rem; margin: 0; }
-.columns dd { margin: .375rem 0 0; }
-.job { padding: 1rem 0; border-top: 1px solid var(--rule); }
-.job h3 { font-size: 1.25rem; font-weight: 400; margin: 0; }
-.job p { margin: .25rem 0 0; }
-.links { display: flex; flex-wrap: wrap; gap: .5rem 2rem; font-size: clamp(1.5rem, 4vw, 2.125rem); }
-footer { padding: 0 0 2.5rem; }
-@media (max-width: 40rem) {
-  .feature { grid-template-columns: 1fr; }
-  .feature .num { margin-bottom: .25rem; }
-  .row { grid-template-columns: 1fr; gap: .25rem; }
+.row .title { font-weight: 500; font-size: 1.0625rem; text-decoration: none; overflow-wrap: anywhere; }
+.row .title:hover { color: var(--sky); }
+.row p { color: var(--soft); font-size: .9688rem; }
+.row p a { color: var(--sky); text-underline-offset: .2em; }
+.row .info { font-size: .875rem; color: var(--muted); text-align: right; white-space: nowrap; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); gap: 1rem; margin: 0; }
+.tile { padding: 1.5rem; }
+.tile dt, .job .period { font-size: .875rem; font-weight: 500; color: var(--sky); }
+.tile dd { margin: .5rem 0 0; color: var(--soft); }
+.job { padding: 1.5rem 1.75rem; margin-bottom: 1rem; }
+.job h3 { font: 500 1.25rem/1.3 var(--font); letter-spacing: -.015em; margin: .25rem 0 .375rem; }
+.job p { color: var(--soft); }
+
+.contact { position: relative; overflow: hidden; text-align: center; padding: clamp(3rem, 8vw, 5rem) 1.5rem; background: radial-gradient(40rem 22rem at 20% 0%, rgba(47, 107, 255, .6), transparent 70%), radial-gradient(36rem 22rem at 85% 100%, rgba(106, 92, 255, .55), transparent 70%), rgba(150, 180, 255, .06); }
+.contact p { color: var(--soft); max-width: 30em; margin: 1rem auto 0; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; padding: 2.5rem 0 2.5rem; font-size: .875rem; color: var(--muted); }
+
+@media (max-width: 46rem) {
+  .bento { grid-template-columns: 1fr; }
+  .feature { min-height: 0; padding: 1.5rem; }
+  .nav li.wide { display: none; }
+  .stats { gap: 1rem 0; }
+  .stats div { padding: 0 1rem; border-left: 0; }
+  .list { padding: .25rem 1.25rem; }
+  .row { grid-template-columns: 1fr; }
+  .row .info { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .feature, .btn, .filters button { transition: none; }
+  .feature:hover { transform: none; }
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
-  <header class="topbar meta">
-    <span>{{ site.name }}, {{ site.location }}</span>
-    <nav aria-label="Sections"><a href="#projects">Projects</a><a href="#contact">Contact</a></nav>
-  </header>
+  <nav class="nav" aria-label="Sections">
+    <a class="name" href="{{ site.url }}">{{ site.name }}</a>
+    <ul>
+      <li class="wide"><a href="#work">Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li class="wide"><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
   <main id="main">
     <div class="hero">
+      <span class="eyebrow">{{ site.name }} · {{ site.location }}</span>
       <h1>{{ site.headline }}</h1>
       <p class="intro">{{ site.intro }}</p>
+      <div class="cta">
+        <a class="btn primary" href="#work">See the work</a>
+        {% if site.links %}<a class="btn" href="{{ site.links[0].url }}">{{ site.links[0].label }}</a>{% endif %}
+      </div>
+      <dl class="stats">
+        <div><dt>Projects</dt><dd>{{ projects | length }}</dd></div>
+        <div><dt>Works in</dt><dd>{{ projects | map(attribute="language") | select | reject("equalto", "Jupyter Notebook") | unique | join(", ") }}</dd></div>
+        <div><dt>Updated</dt><dd>{{ built }}</dd></div>
+      </dl>
     </div>
 
     {% if featured %}
-    <section aria-labelledby="featured-title">
-      <h2 id="featured-title">Selected work</h2>
-      <ol style="list-style:none;margin:0;padding:0">
+    <section id="work" aria-labelledby="featured-title">
+      <div class="head"><span class="kicker">Selected work</span><h2 id="featured-title">Built end to end.</h2></div>
+      <ol class="bento">
         {% for p in featured %}
-        <li class="feature">
-          <span class="meta num">{{ "%02d" | format(loop.index) }}</span>
-          <div>
-            {% if p.image %}<img src="{{ p.image }}" alt="" width="1280" height="640" loading="lazy">{% endif %}
-            <h3><a href="{{ p.url }}">{{ p.name }}</a></h3>
-            {% if p.description %}<p>{{ p.description }}</p>{% endif %}
-            <div class="meta">{{ p.topics | join(" / ") }}{% if p.topics and p.language %} / {% endif %}{{ p.language or "" }}</div>
-            <div class="meta actions">
-              <a href="{{ p.url }}" aria-label="{{ p.name }} source code">Code</a>
-              {% if p.demo %}<a href="{{ p.demo }}" aria-label="{{ p.name }} live demo">Live demo</a>{% endif %}
-            </div>
+        <li class="feature panel">
+          <div class="top"><span>{{ "%02d" | format(loop.index) }}</span><span>{{ p.language or "" }}</span></div>
+          {% if p.image %}<img src="{{ p.image }}" alt="" width="1280" height="640" loading="lazy">{% endif %}
+          <h3><a href="{{ p.url }}">{{ p.name | replace("-", " ") }}</a></h3>
+          {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+          <ul class="chips">{% for t in p.topics %}<li>{{ t }}</li>{% endfor %}</ul>
+          <div class="actions">
+            {% if p.demo %}<a class="btn small primary" href="{{ p.demo }}" aria-label="{{ p.name }} live demo">Live demo</a>{% endif %}
+            <a class="btn small" href="{{ p.url }}" aria-label="{{ p.name }} source code">Source</a>
           </div>
         </li>
         {% endfor %}
@@ -106,7 +190,7 @@ footer { padding: 0 0 2.5rem; }
     {% endif %}
 
     <section id="projects" aria-labelledby="all-title">
-      <h2 id="all-title">All projects <span id="count" aria-live="polite">({{ projects | length }})</span></h2>
+      <div class="head"><span class="kicker" id="count" aria-live="polite">{{ projects | length }} projects</span><h2 id="all-title">Everything on GitHub.</h2></div>
       {% if topics %}
       <div class="filters" id="filters" hidden>
         <button type="button" aria-pressed="true" data-topic="">All</button>
@@ -114,15 +198,12 @@ footer { padding: 0 0 2.5rem; }
         {% endfor %}
       </div>
       {% endif %}
-      <ul>
+      <ul class="list panel">
         {% for p in projects %}
         <li class="row" data-topics="{{ p.topics | join(' ') }}">
-          <span class="meta">{{ p.updated[:7] }}</span>
-          <a href="{{ p.url }}">{{ p.name }}</a>
-          <div>
-            {% if p.description %}<p>{{ p.description }}</p>{% endif %}
-            <div class="meta">{{ p.language or "" }}{% if p.stars %} / {{ p.stars }} star{{ "s" if p.stars != 1 }}{% endif %}{% if p.demo %} / <a href="{{ p.demo }}" aria-label="{{ p.name }} live demo">Live demo</a>{% endif %}</div>
-          </div>
+          <a class="title" href="{{ p.url }}">{{ p.name | replace("-", " ") }}</a>
+          <p>{{ p.description }}{% if p.demo %} <a href="{{ p.demo }}" aria-label="{{ p.name }} live demo">Live demo</a>{% endif %}</p>
+          <span class="info">{{ p.language or "" }}{% if p.language %} · {% endif %}{{ p.updated[:4] }}</span>
         </li>
         {% endfor %}
       </ul>
@@ -130,32 +211,35 @@ footer { padding: 0 0 2.5rem; }
 
     {% if site.experience %}
     <section aria-labelledby="experience-title">
-      <h2 id="experience-title">Experience</h2>
+      <div class="head"><span class="kicker">Experience</span><h2 id="experience-title">Where I've worked.</h2></div>
       {% for job in site.experience %}
-      <div class="job">
+      <div class="job panel">
+        <span class="period">{{ job.period }}</span>
         <h3>{{ job.role }}, {{ job.org }}</h3>
-        <div class="meta">{{ job.period }}</div>
         <p>{{ job.summary }}</p>
       </div>
       {% endfor %}
     </section>
     {% endif %}
 
-    <section aria-labelledby="skills-title">
-      <h2 id="skills-title">Skills</h2>
-      <dl class="columns">
+    <section id="skills" aria-labelledby="skills-title">
+      <div class="head"><span class="kicker">Skills</span><h2 id="skills-title">What I work with.</h2></div>
+      <dl class="tiles">
         {% for s in site.skills %}
-        <div><dt class="meta">{{ s.group }}</dt><dd>{{ s["items"] | join(", ") }}</dd></div>
+        <div class="tile panel"><dt>{{ s.group }}</dt><dd>{{ s["items"] | join(", ") }}</dd></div>
         {% endfor %}
       </dl>
     </section>
 
     <section id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact</h2>
-      <div class="links">{% for link in site.links %}<a href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div>
+      <div class="contact panel">
+        <span class="kicker">Contact</span>
+        <h2 id="contact-title">Get in touch.</h2>
+        <div class="cta">{% for link in site.links %}<a class="btn{{ ' primary' if loop.first }}" href="{{ link.url }}">{{ link.label }}</a>{% endfor %}</div>
+      </div>
     </section>
   </main>
-  <footer class="meta">Project list updated automatically from GitHub on {{ built }}.</footer>
+  <footer><span>{{ site.name }}, {{ site.location }}</span><span>Project list synced from GitHub on {{ built }}</span></footer>
 </div>
 <script>
 (function () {
@@ -171,9 +255,10 @@ footer { padding: 0 0 2.5rem; }
     rows.forEach(function (row) {
       var match = !topic || row.dataset.topics.split(" ").indexOf(topic) !== -1;
       row.hidden = !match;
+      row.classList.toggle("first", match && shown === 0);
       if (match) shown++;
     });
-    document.getElementById("count").textContent = "(" + shown + ")";
+    document.getElementById("count").textContent = shown + (shown === 1 ? " project" : " projects");
   });
 })();
 </script>
